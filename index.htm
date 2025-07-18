@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gopal Shah - Director, Technoholia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-dark: #020617; /* slate-950 */
+            --bg-medium: #0f172a; /* slate-900 */
+            --bg-light: #1e293b; /* slate-800 */
+            --text-primary: #f8fafc; /* slate-50 */
+            --text-secondary: #94a3b8; /* slate-400 */
+            --accent: #22d3ee; /* cyan-400 */
+            --accent-hover: #67e8f9; /* cyan-300 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-secondary);
+        }
+        .section-heading {
+            @apply text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-400 mb-12 text-center;
+        }
+        .card {
+            @apply bg-slate-900 rounded-xl shadow-2xl shadow-slate-950/50 overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-cyan-400/20 border border-slate-800;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            md:left-1/2;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+        }
+        .timeline-item {
+            @apply relative pl-10 md:pl-0 mb-8;
+        }
+        .timeline-dot {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--bg-dark);
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+        @media (min-width: 768px) {
+            .timeline-item {
+                width: 50%;
+                padding-left: 2.5rem;
+            }
+            .timeline-item:nth-child(odd) {
+                left: 0;
+            }
+            .timeline-item:nth-child(even) {
+                left: 50%;
+                padding-left: 0;
+                padding-right: 2.5rem;
+            }
+             .timeline-item:nth-child(even) .timeline-content {
+                @apply text-right;
+            }
+             .timeline-item:nth-child(even) .timeline-content ul {
+                @apply text-left;
+            }
+            .timeline-dot {
+                left: 50%;
+                 top: 24px;
+            }
+        }
+        .tech-tab.active, .project-filter.active {
+            @apply bg-cyan-500 text-white;
+        }
+        .project-card {
+            transition: all 0.3s ease-in-out;
+        }
+        .project-card.hidden {
+            transform: scale(0.9);
+            opacity: 0;
+            width: 0;
+            height: 0;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-slate-950/70 backdrop-blur-lg shadow-lg shadow-black/50 sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-white">Gopal Shah</div>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#about" class="text-slate-300 hover:text-cyan-400 transition-colors">About</a>
+                <a href="#skills" class="text-slate-300 hover:text-cyan-400 transition-colors">Expertise</a>
+                <a href="#experience" class="text-slate-300 hover:text-cyan-400 transition-colors">Journey</a>
+                <a href="#projects" class="text-slate-300 hover:text-cyan-400 transition-colors">Projects</a>
+                <a href="#mentor" class="text-slate-300 hover:text-cyan-400 transition-colors">Mentor</a>
+                <a href="#contact" class="bg-cyan-500 text-white py-2 px-4 rounded-full hover:bg-cyan-400 transition-colors font-semibold">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden flex items-center text-white"><i data-lucide="menu"></i></button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4">
+            <a href="#about" class="mobile-link block py-2 text-slate-300 hover:text-cyan-400">About</a>
+            <a href="#skills" class="mobile-link block py-2 text-slate-300 hover:text-cyan-400">Expertise</a>
+            <a href="#experience" class="mobile-link block py-2 text-slate-300 hover:text-cyan-400">Journey</a>
+            <a href="#projects" class="mobile-link block py-2 text-slate-300 hover:text-cyan-400">Projects</a>
+            <a href="#mentor" class="mobile-link block py-2 text-slate-300 hover:text-cyan-400">Mentor</a>
+            <a href="#contact" class="mobile-link block mt-2 bg-cyan-500 text-white text-center py-2 px-4 rounded-full hover:bg-cyan-400 font-semibold">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Hero Section -->
+        <section id="hero" class="flex flex-col md:flex-row items-center my-12 md:my-24">
+            <div class="md:w-3/5 text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">Gopal Shah</h1>
+                <p class="text-xl md:text-2xl text-cyan-400 font-semibold mt-2 mb-6">Director at Technoholia</p>
+                <p class="text-lg text-slate-300 max-w-xl">An Entrepreneur in Information Technology and Technical Education, driving business success through robust cloud strategy, operational excellence, and dedicated mentorship.</p>
+                <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
+                    <a href="https://www.linkedin.com/in/gopalshah20/" target="_blank" class="bg-cyan-500 text-white py-3 px-6 rounded-full font-semibold flex items-center space-x-2 hover:bg-cyan-400 transition-colors">
+                        <i data-lucide="linkedin"></i><span>Verify on LinkedIn</span>
+                    </a>
+                    <a href="https://www.technoholia.com.au/" target="_blank" class="bg-slate-700 text-white py-3 px-6 rounded-full font-semibold flex items-center space-x-2 hover:bg-slate-600 transition-colors">
+                        <i data-lucide="globe"></i><span>Technoholia</span>
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-2/5 mt-12 md:mt-0 flex justify-center">
+                <div class="relative">
+                    <img src="https://placehold.co/400x400/0f172a/22d3ee?text=GS" alt="Gopal Shah" class="rounded-full shadow-2xl shadow-cyan-500/20 w-64 h-64 md:w-80 md:h-80 object-cover">
+                    <div class="absolute inset-0 rounded-full border-4 border-cyan-400/50 animate-pulse"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24">
+            <h2 class="section-heading">Who is Gopal?</h2>
+            <div class="card p-8 md:p-12 max-w-4xl mx-auto text-center">
+                <i data-lucide="rocket" class="text-cyan-400 w-16 h-16 mx-auto mb-6"></i>
+                <p class="text-lg md:text-xl leading-relaxed text-slate-200">
+                   As a visionary Tech enthusiast, I am passionate about leveraging technology to drive business goals in both enterprise and start-up settings. My journey across the UK, USA, Europe, and APAC has equipped me with a rich, global perspective. This experience is the foundation of my entrepreneurial venture, Technoholia, where I translate complex technical problems into reliable, scalable solutions. My core strength lies in bridging the gap between theoretical knowledge and practical application, a philosophy that defines my approach to both IT leadership and technical education. I am deeply committed to fostering innovation, not just in systems and infrastructure, but in the people who build them.
+                </p>
+            </div>
+        </section>
+
+        <!-- Technical Expertise Section -->
+        <section id="skills" class="py-24">
+            <h2 class="section-heading">Technical Expertise</h2>
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8" id="tech-tabs">
+                    <button data-target="cloud" class="tech-tab active py-2 px-5 rounded-full bg-slate-800 hover:bg-slate-700 transition">Cloud & Virtualization</button>
+                    <button data-target="observability" class="tech-tab py-2 px-5 rounded-full bg-slate-800 hover:bg-slate-700 transition">Observability</button>
+                    <button data-target="devops" class="tech-tab py-2 px-5 rounded-full bg-slate-800 hover:bg-slate-700 transition">DevOps & ITSM</button>
+                    <button data-target="cms" class="tech-tab py-2 px-5 rounded-full bg-slate-800 hover:bg-slate-700 transition">Web & CMS</button>
+                    <button data-target="data" class="tech-tab py-2 px-5 rounded-full bg-slate-800 hover:bg-slate-700 transition">Databases</button>
+                    <button data-target="infra" class="tech-tab py-2 px-5 rounded-full bg-slate-800 hover:bg-slate-700 transition">Core Infrastructure</button>
+                </div>
+                <div id="tech-content" class="card p-8 min-h-[200px]">
+                    <div data-id="cloud" class="tech-panel grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-center">
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/3b82f6/ffffff?text=Azure" class="rounded-lg"/><span>Azure</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/ff9900/ffffff?text=AWS" class="rounded-lg"/><span>AWS</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/34a853/ffffff?text=GCP" class="rounded-lg"/><span>GCP</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/6b7280/ffffff?text=VMware" class="rounded-lg"/><span>VMware</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/4f46e5/ffffff?text=Hyper-V" class="rounded-lg"/><span>Hyper-V</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/f97316/ffffff?text=Citrix" class="rounded-lg"/><span>Citrix</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/0ea5e9/ffffff?text=Rackspace" class="rounded-lg"/><span>Rackspace</span></div>
+                    </div>
+                     <div data-id="observability" class="hidden tech-panel grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-center">
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/8b5cf6/ffffff?text=Dynatrace" class="rounded-lg"/><span>Dynatrace</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/f59e0b/ffffff?text=Splunk" class="rounded-lg"/><span>Splunk</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/ef4444/ffffff?text=New+Relic" class="rounded-lg"/><span>New Relic</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/10b981/ffffff?text=AppInsight" class="rounded-lg"/><span>AppInsight</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/ec4899/ffffff?text=PagerDuty" class="rounded-lg"/><span>PagerDuty</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/78716c/ffffff?text=Nagios" class="rounded-lg"/><span>Nagios</span></div>
+                    </div>
+                     <div data-id="devops" class="hidden tech-panel grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-center">
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/1f2937/ffffff?text=GitHub" class="rounded-lg"/><span>GitHub</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/0ea5e9/ffffff?text=Jenkins" class="rounded-lg"/><span>Jenkins</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/4f46e5/ffffff?text=JIRA" class="rounded-lg"/><span>JIRA</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/dc2626/ffffff?text=Octopus" class="rounded-lg"/><span>Octopus Deploy</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/f43f5e/ffffff?text=ServiceNow" class="rounded-lg"/><span>ServiceNow</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/06b6d4/ffffff?text=Informatica" class="rounded-lg"/><span>Informatica</span></div>
+                     </div>
+                      <div data-id="cms" class="hidden tech-panel grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-center">
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/f97316/ffffff?text=AEM" class="rounded-lg"/><span>AEM (Adobe)</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/0891b2/ffffff?text=Sitecore" class="rounded-lg"/><span>Sitecore</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/84cc16/ffffff?text=Optimizely" class="rounded-lg"/><span>Episerver/Optimizely</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/0ea5e9/ffffff?text=WordPress" class="rounded-lg"/><span>WordPress</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/a855f7/ffffff?text=DNN" class="rounded-lg"/><span>DotNetNuke</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/2563eb/ffffff?text=SharePoint" class="rounded-lg"/><span>SharePoint</span></div>
+                    </div>
+                     <div data-id="data" class="hidden tech-panel grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-center">
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/16a34a/ffffff?text=Mongo" class="rounded-lg"/><span>MongoDB</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/0ea5e9/ffffff?text=PostgreSQL" class="rounded-lg"/><span>PostgreSQL</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/6366f1/ffffff?text=DynamoDB" class="rounded-lg"/><span>DynamoDB</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/eab308/ffffff?text=MySQL" class="rounded-lg"/><span>MySQL</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/b91c1c/ffffff?text=MS+SQL" class="rounded-lg"/><span>MS SQL Server</span></div>
+                     </div>
+                      <div data-id="infra" class="hidden tech-panel grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-center">
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/0284c7/ffffff?text=Windows" class="rounded-lg"/><span>Windows Server</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/1f2937/ffffff?text=Linux" class="rounded-lg"/><span>Linux</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/f59e0b/ffffff?text=F5" class="rounded-lg"/><span>F5 Load Balancer</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/d97706/ffffff?text=Fortigate" class="rounded-lg"/><span>Fortigate Firewall</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/65a30d/ffffff?text=PowerShell" class="rounded-lg"/><span>PowerShell</span></div>
+                        <div class="flex flex-col items-center gap-2"><img src="https://placehold.co/64x64/0369a1/ffffff?text=Akamai" class="rounded-lg"/><span>Akamai CDN</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-24">
+            <h2 class="section-heading">Professional Journey</h2>
+            <div class="relative max-w-5xl mx-auto timeline">
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content card p-6"><p class="text-sm font-semibold text-cyan-400">Apr 2022 - Present</p><h3 class="text-xl font-bold mt-1 text-white">Domain Operation Manager</h3><a href="https://www.wooliesx.com.au/" target="_blank" class="font-semibold text-slate-300 hover:text-cyan-400 mb-3 block">WooliesX <i data-lucide="arrow-up-right" class="inline h-4 w-4"></i></a><ul class="list-disc list-inside text-slate-400 space-y-2"><li>Managed operations for Everyday Rewards, Insurance, Mobile, Market, WPay, and Data.</li><li>Achieved 100% uptime for Rewards website for six consecutive months.</li></ul></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content card p-6"><p class="text-sm font-semibold text-cyan-400">Mar 2023 - Mar 2025</p><h3 class="text-xl font-bold mt-1 text-white">Reliability Operation Manager</h3> <a href="https://www.wooliesx.com.au/" target="_blank" class="font-semibold text-slate-300 hover:text-cyan-400 mb-3 block">WooliesX <i data-lucide="arrow-up-right" class="inline h-4 w-4"></i></a><ul class="list-disc list-inside text-slate-400 space-y-2"><li>Led a team of 24 engineers supporting 500k customers.</li><li>Served as primary Incident Commander for Major Incidents (MIM).</li></ul></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content card p-6"><p class="text-sm font-semibold text-cyan-400">Oct 2021 - Present</p><h3 class="text-xl font-bold mt-1 text-white">Reliability Operation Specialist</h3><a href="https://www.wooliesx.com.au/" target="_blank" class="font-semibold text-slate-300 hover:text-cyan-400 mb-3 block">WooliesX <i data-lucide="arrow-up-right" class="inline h-4 w-4"></i></a> <ul class="list-disc list-inside text-slate-400 space-y-2"><li>Supported over 15 million B2C customers across Australia.</li><li>Resolved 95% of fraud issues with innovative analytical solutions.</li></ul></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content card p-6"><p class="text-sm font-semibold text-cyan-400">Jan 2019 - Oct 2021</p><h3 class="text-xl font-bold mt-1 text-white">Tier II Technical Support Specialist</h3><a href="https://www.newforma.com/" target="_blank" class="font-semibold text-slate-300 hover:text-cyan-400 mb-3 block">Newforma <i data-lucide="arrow-up-right" class="inline h-4 w-4"></i></a> <ul class="list-disc list-inside text-slate-400 space-y-2"><li>Provided enterprise software support for 100+ customers across APAC.</li><li>Managed projects from pre-sales to go-live with hands-on deployment.</li></ul></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content card p-6"><p class="text-sm font-semibold text-cyan-400">Sep 2016 - Jan 2019</p><h3 class="text-xl font-bold mt-1 text-white">Managed Services, Manager APAC</h3><a href="https://www.optimizely.com/" target="_blank" class="font-semibold text-slate-300 hover:text-cyan-400 mb-3 block">Optimizely (Episerver) <i data-lucide="arrow-up-right" class="inline h-4 w-4"></i></a> <ul class="list-disc list-inside text-slate-400 space-y-2"><li>Led and mentored the APAC support team, fostering a high-performance culture.</li><li>Acted as primary technical escalation for P1 issues on Azure, AWS, and Rackspace.</li></ul></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content card p-6"><p class="text-sm font-semibold text-cyan-400">Sep 2015 - Sep 2016</p><h3 class="text-xl font-bold mt-1 text-white">Business Support Engineer</h3><a href="https://www.eset.com/au/" target="_blank" class="font-semibold text-slate-300 hover:text-cyan-400 mb-3 block">ESET Australia <i data-lucide="arrow-up-right" class="inline h-4 w-4"></i></a> <ul class="list-disc list-inside text-slate-400 space-y-2"><li>Provided pre-sales and post-sales consultancy for ESET's product range.</li><li>Delivered technical training to staff and clients on security best practices.</li></ul></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content card p-6"><p class="text-sm font-semibold text-cyan-400">Feb 2015 - Sep 2015</p><h3 class="text-xl font-bold mt-1 text-white">System Administrator</h3><a href="http://presagesolutions.com/" target="_blank" class="font-semibold text-slate-300 hover:text-cyan-400 mb-3 block">Presage Solutions <i data-lucide="arrow-up-right" class="inline h-4 w-4"></i></a> <ul class="list-disc list-inside text-slate-400 space-y-2"><li>Designed and built Sitecore 7.2 Web Infrastructure for new projects.</li><li>Managed server security hardening (CIS, PCI DSS) and vulnerability scanning.</li></ul></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content card p-6"><p class="text-sm font-semibold text-cyan-400">May 2014 - Nov 2014</p><h3 class="text-xl font-bold mt-1 text-white">Senior Consultant</h3><a href="https://www.capgemini.com/" target="_blank" class="font-semibold text-slate-300 hover:text-cyan-400 mb-3 block">Capgemini <i data-lucide="arrow-up-right" class="inline h-4 w-4"></i></a> <ul class="list-disc list-inside text-slate-400 space-y-2"><li>Managed IIS/SQL/Sitecore infrastructure projects and data center migrations.</li><li>Led team building, feasibility studies, and risk assessments for large-scale projects.</li></ul></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content card p-6"><p class="text-sm font-semibold text-cyan-400">Apr 2010 - May 2014</p><h3 class="text-xl font-bold mt-1 text-white">System Administrator</h3><a href="https://www.investisdigital.com/" target="_blank" class="font-semibold text-slate-300 hover:text-cyan-400 mb-3 block">Investis Digital <i data-lucide="arrow-up-right" class="inline h-4 w-4"></i></a> <ul class="list-disc list-inside text-slate-400 space-y-2"><li>Managed over 2000+ websites hosted on Windows IIS and Sitecore CMS.</li><li>Ensured 99.5%+ uptime and implemented robust security measures.</li></ul></div></div>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects" class="py-24">
+            <h2 class="section-heading">Project Showcase</h2>
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8" id="project-filters">
+                    <button data-filter="*" class="project-filter active py-2 px-5 rounded-full bg-slate-800 hover:bg-slate-700 transition">All Projects</button>
+                    <button data-filter="wooliesx" class="project-filter py-2 px-5 rounded-full bg-slate-800 hover:bg-slate-700 transition">WooliesX</button>
+                    <button data-filter="investis" class="project-filter py-2 px-5 rounded-full bg-slate-800 hover:bg-slate-700 transition">Investis</button>
+                    <button data-filter="migration" class="project-filter py-2 px-5 rounded-full bg-slate-800 hover:bg-slate-700 transition">Migration</button>
+                    <button data-filter="security" class="project-filter py-2 px-5 rounded-full bg-slate-800 hover:bg-slate-700 transition">Security</button>
+                    <button data-filter="infra" class="project-filter py-2 px-5 rounded-full bg-slate-800 hover:bg-slate-700 transition">Infrastructure</button>
+                </div>
+                <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="project-card card p-6" data-groups='["wooliesx", "migration"]'> <h3 class="text-lg font-bold text-white mb-2">Hollard Data Center Migration</h3><p class="text-sm">Led the time-critical migration of a data center from the Woolworths environment, ensuring a seamless transition with zero post-migration incidents.</p></div>
+                    <div class="project-card card p-6" data-groups='["wooliesx", "infra"]'> <h3 class="text-lg font-bold text-white mb-2">Monitoring Platform Integration</h3><p class="text-sm">Designed and executed end-to-end integration of Dynatrace, Splunk, PagerDuty, and New Relic for the Loyalty domain.</p></div>
+                    <div class="project-card card p-6" data-groups='["wooliesx", "infra"]'> <h3 class="text-lg font-bold text-white mb-2">RTL Program "Go-Live" Deployment</h3><p class="text-sm">Managed and coordinated the overnight deployment of 40 complex changes for a major program launch, ensuring zero downtime.</p></div>
+                    <div class="project-card card p-6" data-groups='["newforma", "migration"]'> <h3 class="text-lg font-bold text-white mb-2">Cloud Migration for APAC Clients</h3><p class="text-sm">Led the migration of client infrastructure to Azure and AWS, automating deployment and monitoring scripts to improve scalability.</p></div>
+                    <div class="project-card card p-6" data-groups='["optimizely", "infra"]'> <h3 class="text-lg font-bold text-white mb-2">High-Availability Web Platform</h3><p class="text-sm">Managed the deployment and support of high-availability web platforms, ensuring 99.99% uptime through automation.</p></div>
+                    <div class="project-card card p-6" data-groups='["capgemini", "migration", "infra"]'> <h3 class="text-lg font-bold text-white mb-2">Sitecore DC Migration</h3><p class="text-sm">Managed migration of business-critical applications and websites to a new Sitecore infrastructure, ensuring minimal downtime.</p></div>
+                    <div class="project-card card p-6" data-groups='["investis", "infra", "upgrade"]'> <h3 class="text-lg font-bold text-white mb-2">Sitecore/IIS Version Upgrade</h3><p class="text-sm">Upgraded Sitecore CMS from v6.3.1 to v6.4.1 across a large web farm, improving performance and enabling new features.</p></div>
+                    <div class="project-card card p-6" data-groups='["investis", "infra"]'> <h3 class="text-lg font-bold text-white mb-2">Server & App Consolidation</h3><p class="text-sm">Consolidated numerous Windows and .NET based applications to improve manageability and reduce operational costs.</p></div>
+                    <div class="project-card card p-6" data-groups='["investis", "infra", "devops"]'> <h3 class="text-lg font-bold text-white mb-2">Automated Web Deployments</h3><p class="text-sm">Configured MS Web Deploy and DFS to create an automated deployment pipeline for web farms, reducing deployment time.</p></div>
+                    <div class="project-card card p-6" data-groups='["investis", "devops"]'> <h3 class="text-lg font-bold text-white mb-2">SVN, TFS & SharePoint Setup</h3><p class="text-sm">Installed and configured Subversion, Team Foundation Server, and SharePoint to establish a collaborative development ecosystem.</p></div>
+                    <div class="project-card card p-6" data-groups='["investis", "infra"]'> <h3 class="text-lg font-bold text-white mb-2">NAS Storage for Backups</h3><p class="text-sm">Designed and implemented a centralized NAS storage solution for enterprise-wide backups, improving data resilience and recovery times.</p></div>
+                    <div class="project-card card p-6" data-groups='["investis", "security"]'> <h3 class="text-lg font-bold text-white mb-2">Enterprise Vulnerability Scanning</h3><p class="text-sm">Implemented a Nessus-based vulnerability scanning system to enhance the security posture across the enterprise infrastructure.</p></div>
+                    <div class="project-card card p-6" data-groups='["investis", "infra"]'> <h3 class="text-lg font-bold text-white mb-2">Enterprise Monitoring System</h3><p class="text-sm">Deployed and configured Nagios and OpManager for comprehensive, enterprise-wide system and application monitoring.</p></div>
+                    <div class="project-card card p-6" data-groups='["investis", "infra", "migration"]'> <h3 class="text-lg font-bold text-white mb-2">VMware Infrastructure Design</h3><p class="text-sm">Designed and implemented a scalable VMware virtual infrastructure from the ground up, including P2V and V2V migrations.</p></div>
+                    <div class="project-card card p-6" data-groups='["investis", "infra"]'> <h3 class="text-lg font-bold text-white mb-2">Open-Source CMS Implementation</h3><p class="text-sm">Deployed and managed a Wordpress CMS instance on a Linux and MySQL stack, diversifying the company's CMS offerings.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mentor Section -->
+        <section id="mentor" class="py-24">
+            <h2 class="section-heading">Educator, Mentor & Your Career Catalyst</h2>
+            <div class="card p-8 md:p-12 max-w-4xl mx-auto text-center">
+                 <i data-lucide="brain-circuit" class="text-cyan-400 w-16 h-16 mx-auto mb-6"></i>
+                 <h3 class="text-2xl font-bold text-white mb-4">Launch Your IT Career with Technoholia</h3>
+                <p class="text-lg leading-relaxed text-slate-200 mb-6">
+                   At Technoholia, our mission is to forge the next generation of IT leaders. We believe that true expertise comes from applying knowledge to real-world challenges. My journey, from hands-on system administration to leading complex cloud operations, has reinforced this belief. I've personally mentored teams at Optimizely and trained staff at ESET, fostering environments where learning and growth are paramount.
+                </p>
+                <p class="text-lg leading-relaxed text-slate-200">
+                   Technoholia is the culmination of this experience. We provide a unique platform that bridges the gap between academic theory and industry demands. Through hands-on projects, personalized mentorship, and exposure to enterprise-grade technologies, we empower interns and aspiring professionals to build not just a resume, but a career. Your journey with us is a direct path to acquiring the practical, in-demand skills needed to thrive in today's competitive IT landscape.
+                </p>
+            </div>
+        </section>
+
+        <!-- Education & Certs -->
+        <section id="education" class="py-24">
+            <h2 class="section-heading">Qualifications</h2>
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
+                <div class="card p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-white">Education</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4"><div class="bg-cyan-500/10 text-cyan-400 rounded-full h-12 w-12 flex-shrink-0 flex items-center justify-center"><i data-lucide="graduation-cap"></i></div><div><h4 class="font-bold text-lg text-white">PG Diploma in Computer Application</h4><p class="text-slate-400">Maharaja Sayajirao University</p></div></div>
+                        <div class="flex items-center space-x-4"><div class="bg-cyan-500/10 text-cyan-400 rounded-full h-12 w-12 flex-shrink-0 flex items-center justify-center"><i data-lucide="graduation-cap"></i></div><div><h4 class="font-bold text-lg text-white">B.Sc. in Computer Science</h4><p class="text-slate-400">Sardar Patel University</p></div></div>
+                    </div>
+                </div>
+                <div class="card p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-white">Certifications</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-slate-800 p-4 rounded-lg flex items-center space-x-3"><i data-lucide="award" class="h-5 w-5 text-cyan-400 flex-shrink-0"></i><span class="text-slate-300">Azure Fundamentals</span></div>
+                        <div class="bg-slate-800 p-4 rounded-lg flex items-center space-x-3"><i data-lucide="award" class="h-5 w-5 text-cyan-400 flex-shrink-0"></i><span class="text-slate-300">Google Cloud Leader</span></div>
+                        <div class="bg-slate-800 p-4 rounded-lg flex items-center space-x-3"><i data-lucide="award" class="h-5 w-5 text-cyan-400 flex-shrink-0"></i><span class="text-slate-300">PRINCE2 Practitioner</span></div>
+                        <div class="bg-slate-800 p-4 rounded-lg flex items-center space-x-3"><i data-lucide="award" class="h-5 w-5 text-cyan-400 flex-shrink-0"></i><span class="text-slate-300">VMware Certified Pro</span></div>
+                        <div class="bg-slate-800 p-4 rounded-lg flex items-center space-x-3"><i data-lucide="award" class="h-5 w-5 text-cyan-400 flex-shrink-0"></i><span class="text-slate-300">ITILv3 Foundation</span></div>
+                        <div class="bg-slate-800 p-4 rounded-lg flex items-center space-x-3"><i data-lucide="award" class="h-5 w-5 text-cyan-400 flex-shrink-0"></i><span class="text-slate-300">MCSA & CCNA</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24">
+            <div class="max-w-3xl mx-auto text-center card p-12">
+                <h2 class="section-heading mt-0">Let's Connect</h2>
+                <p class="text-slate-300 mb-8 max-w-xl mx-auto">I am always open to discussing new opportunities, innovative projects, or potential collaborations.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-8">
+                    <a href="mailto:contact@technoholia.com.au" class="text-lg text-slate-300 hover:text-cyan-400 transition-colors flex items-center space-x-3"><i data-lucide="mail"></i><span>contact@technoholia.com.au</span></a>
+                    <div class="flex items-center space-x-3 text-lg text-slate-300"><i data-lucide="phone"></i><span>0421 826 596</span></div>
+                    <a href="vcard.html" class="text-lg text-slate-300 hover:text-cyan-400 transition-colors flex items-center space-x-3"><i data-lucide="vcard.html"></i><span>vCard</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950/50 border-t border-slate-800 py-6">
+        <div class="container mx-auto text-center text-slate-500">
+            <p>&copy; 2025 Gopal Shah | Director, Technoholia</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+        
+        // Tech Tabs
+        const techTabsContainer = document.getElementById('tech-tabs');
+        const techPanels = document.querySelectorAll('.tech-panel');
+        techTabsContainer.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                const targetPanelId = e.target.dataset.target;
+                techTabsContainer.querySelector('.active').classList.remove('active');
+                e.target.classList.add('active');
+                techPanels.forEach(panel => {
+                    panel.classList.toggle('hidden', panel.dataset.id !== targetPanelId);
+                });
+            }
+        });
+
+        // Project Filtering
+        const filtersContainer = document.getElementById('project-filters');
+        const projectCards = document.querySelectorAll('.project-card');
+        filtersContainer.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                const filter = e.target.dataset.filter;
+                filtersContainer.querySelector('.active').classList.remove('active');
+                e.target.classList.add('active');
+                
+                projectCards.forEach(card => {
+                    const groups = JSON.parse(card.dataset.groups.replace(/'/g, '"'));
+                    const shouldShow = filter === '*' || groups.includes(filter);
+                    card.classList.toggle('hidden', !shouldShow);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
