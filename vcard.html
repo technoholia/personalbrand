@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Digital vCard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        /* Custom styling for the QR code container to ensure it's centered and styled nicely */
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem; /* Padding inside the QR code box */
+            background-color: #ffffff; /* White background for the QR code */
+            border-radius: 0.75rem; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            width: fit-content; /* Adjust width to content */
+            margin: 0 auto; /* Center the QR code container */
+        }
+        /* Style for the QR code canvas itself, if needed */
+        #qrcode canvas {
+            display: block; /* Remove extra space below canvas */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full text-center border border-gray-200">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">Your Name Here</h1>
+        <p class="text-lg text-gray-600 mb-6">Your Job Title / Company</p>
+
+        <div class="space-y-3 mb-8 text-gray-700">
+            <p class="flex items-center justify-center text-base">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7zm3 15a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                </svg>
+                +1 (555) 123-4567
+            </p>
+            <p class="flex items-center justify-center text-base">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+                your.email@example.com
+            </p>
+            <p class="flex items-center justify-center text-base">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3.15 3.15A1.5 1.5 0 0010.15 11H9.5a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h.5a.5.5 0 00.354-.146l3.15-3.15zM10.15 11l-.354.354A1.5 1.5 0 018.5 13.15V14.5a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-1a.5.5 0 01.146-.354l.354-.354z" clip-rule="evenodd" />
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0 2a10 10 0 100-20 10 10 0 000 20z" clip-rule="evenodd" />
+                </svg>
+                yourwebsite.com
+            </p>
+        </div>
+
+        <p class="text-md text-gray-600 mb-6">Scan the QR code below to save my contact details:</p>
+
+        <!-- QR Code will be generated here -->
+        <div id="qrcode" class="mb-6"></div>
+
+        <p class="text-sm text-gray-500">
+            This vCard was created digitally.
+        </p>
+    </div>
+
+    <!-- QR Code JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
+    <script>
+        // Define your contact details
+        const contact = {
+            firstName: "Gopal",
+            lastName: "Shah",
+            organization: "TECHNOHOLIA",
+            title: "Director",
+            phoneWork: "+61-421826596", // No spaces or dashes for vCard
+            phoneCell: "+61-421826596", // Optional cell number
+            email: "contact@technoholia.com.au",
+            website: "https://www.technoholia.com.au",
+            address: {
+                street: "50 Grandeur Parade",
+                city: "Riverstone",
+                state: "NSW",
+                zip: "2765",
+                country: "AUSTRALIA"
+            }
+        };
+
+        // Construct the vCard string
+        const vCard = `BEGIN:VCARD
+VERSION:3.0
+N:${contact.lastName};${contact.firstName};;;
+FN:${contact.firstName} ${contact.lastName}
+ORG:${contact.organization}
+TITLE:${contact.title}
+TEL;TYPE=WORK,VOICE:${contact.phoneWork}
+${contact.phoneCell ? `TEL;TYPE=CELL,VOICE:${contact.phoneCell}` : ''}
+EMAIL;TYPE=PREF,INTERNET:${contact.email}
+URL:${contact.website}
+ADR;TYPE=WORK:;;${contact.address.street};${contact.address.city};${contact.address.state};${contact.address.zip};${contact.address.country}
+END:VCARD`;
+
+        // Generate the QR code
+        // The QR code will be generated inside the div with id="qrcode"
+        new QRCode(document.getElementById("qrcode"), {
+            text: vCard,
+            width: 256,  // Set a fixed width for the QR code
+            height: 256, // Set a fixed height for the QR code
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H // High error correction level
+        });
+
+        // Optional: Dynamically update contact details on the page (for demonstration)
+        document.querySelector('h1').textContent = `${contact.firstName} ${contact.lastName}`;
+        document.querySelector('p.text-lg').textContent = `${contact.title} / ${contact.organization}`;
+        document.querySelectorAll('p.flex.items-center.justify-center.text-base')[0].innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7zm3 15a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+            </svg>
+            ${contact.phoneWork.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}
+        `;
+        document.querySelectorAll('p.flex.items-center.justify-center.text-base')[1].innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+            </svg>
+            ${contact.email}
+        `;
+        document.querySelectorAll('p.flex.items-center.justify-center.text-base')[2].innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3.15 3.15A1.5 1.5 0 0010.15 11H9.5a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h.5a.5.5 0 00.354-.146l3.15-3.15zM10.15 11l-.354.354A1.5 1.5 0 018.5 13.15V14.5a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-1a.5.5 0 01.146-.354l.354-.354z" clip-rule="evenodd" />
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0 2a10 10 0 100-20 10 10 0 000 20z" clip-rule="evenodd" />
+            </svg>
+            <a href="${contact.website}" target="_blank" class="text-blue-600 hover:underline">${contact.website.replace('https://', '')}</a>
+        `;
+    </script>
+</body>
+</html>
